@@ -1,4 +1,4 @@
-### **Introduction to Spark Labs**
+### **Spark Labs**
 
 Apache Spark is a powerful distributed computing framework widely used for processing large-scale data efficiently. In these labs, you will gain hands-on experience in setting up, building, and running Spark applications using **Scala** and **SBT**, as well as deploying and managing Spark clusters using **Docker**. 
 
