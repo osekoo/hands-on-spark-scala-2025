@@ -210,6 +210,18 @@ This script wraps the `docker-compose down` command to stop the Spark cluster.
      run-app.bat
      ```
 
+   - **Expected Output**  
+      The console should display the word count results:
+      ```
+      (pineapple,940)
+      (melon,934)
+      (orange,934)
+      (banana,929)
+      (kiwi,927)
+      (apple,927)
+      (carrot,919)
+      ```
+
 3. **Stop the Spark Cluster:**
    - **Linux/MacOS**:
      ```bash
@@ -219,7 +231,6 @@ This script wraps the `docker-compose down` command to stop the Spark cluster.
      ```cmd
      spark-stop.bat
      ```
-
 
 
 ### **Outcome**
