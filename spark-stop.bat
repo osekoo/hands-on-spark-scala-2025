@@ -1,0 +1,3 @@
+@echo off
+echo Stopping Spark cluster...
+docker-compose down
