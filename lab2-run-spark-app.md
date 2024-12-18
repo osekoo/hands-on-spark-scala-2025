@@ -50,6 +50,10 @@ Verify installation:
 docker-compose --version
 ```
 
+**Note:**  
+You can download all the files mentioned in these labs from the [GitHub repository](https://github.com/osekoo/hands-on-spark-scala-2025), or you can continue following the tutorial to create them step by step on your own. Both approaches will help you complete the labs successfully, but creating the files yourself will provide a deeper understanding of the concepts and practices involved.
+
+
 ### **3. Create `docker-compose.yml`**
 1. In your working directory, create a file named `docker-compose.yml`.
 2. Add the following content to define the Spark cluster:
