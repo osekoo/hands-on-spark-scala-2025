@@ -55,27 +55,28 @@ docker-compose --version
 2. Add the following content to define the Spark cluster:
    ```yaml
       version: '3.8'
-    services:
-      spark-master:
-        image: bitnami/spark:3.5
-        container_name: spark-master
-        environment:
-          - SPARK_MODE=master
-          - SPARK_MASTER_HOST=spark-master
-        ports:
-          - "8080:8080"
-          - "7077:7077"
-        volumes:
-          - ./:/app
-    
-      spark-worker:
-        image: bitnami/spark:3.5
-        container_name: spark-worker
-        environment:
-          - SPARK_MODE=worker
-          - SPARK_MASTER_URL=spark://spark-master:7077
-        depends_on:
-          - spark-master
+      services:
+        spark-master:
+          image: bitnami/spark:3.5
+          container_name: spark-master
+          environment:
+            - SPARK_MODE=master
+            - SPARK_MASTER_HOST=spark-master
+          ports:
+            - "8080:8080"
+            - "7077:7077"
+          volumes:
+            - ./:/app
+          working_dir: /app
+      
+        spark-worker:
+          image: bitnami/spark:3.5
+          container_name: spark-worker
+          environment:
+            - SPARK_MODE=worker
+            - SPARK_MASTER_URL=spark://spark-master:7077
+          depends_on:
+            - spark-master
    ```
 
    **Explanation**:
@@ -97,7 +98,7 @@ docker-compose --version
           --executor-memory 2G \
           --num-executors 1 \
           --class "MainApp" \
-          "/app/target/scala-2.12/wordcount_2.12-0.1.jar" \
+          "target/scala-2.12/wordcount_2.12-0.1.jar" \
 
    ```
 
