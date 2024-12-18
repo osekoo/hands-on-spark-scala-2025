@@ -76,13 +76,14 @@ You can download all the files mentioned in these labs from the [GitHub reposito
       
         spark-worker:
           image: bitnami/spark:3.5
-          container_name: spark-worker
           environment:
             - SPARK_MODE=worker
             - SPARK_MASTER_URL=spark://spark-master:7077
           depends_on:
             - spark-master
           restart: unless-stopped
+          deploy:
+            replicas: 2
    ```
 
    **Explanation**:
