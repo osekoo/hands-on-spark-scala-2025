@@ -63,6 +63,7 @@ You can download all the files mentioned in these labs from the [GitHub reposito
         spark-master:
           image: bitnami/spark:3.5
           container_name: spark-master
+          working_dir: /app
           environment:
             - SPARK_MODE=master
             - SPARK_MASTER_HOST=spark-master
@@ -71,7 +72,7 @@ You can download all the files mentioned in these labs from the [GitHub reposito
             - "7077:7077"
           volumes:
             - ./:/app
-          working_dir: /app
+          restart: unless-stopped
       
         spark-worker:
           image: bitnami/spark:3.5
@@ -81,6 +82,7 @@ You can download all the files mentioned in these labs from the [GitHub reposito
             - SPARK_MASTER_URL=spark://spark-master:7077
           depends_on:
             - spark-master
+          restart: unless-stopped
    ```
 
    **Explanation**:
