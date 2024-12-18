@@ -175,28 +175,6 @@ libraryDependencies ++= Seq(
 
 
 
-### **6. Run the Spark Application**
-Run the application to verify functionality:
-```bash
-spark-submit --class MainApp target/scala-2.12/wordcount_2.12-0.1.jar
-```
-
-
-
-### **Expected Output**
-The console should display the word count results:
-```
-(pineapple,940)
-(melon,934)
-(orange,934)
-(banana,929)
-(kiwi,927)
-(apple,927)
-(carrot,919)
-```
-
-
-
 ### **Outcome**
 By completing this lab, you will:
 - Set up the environment for Scala and Spark development.
