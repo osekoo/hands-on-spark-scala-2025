@@ -6,7 +6,7 @@ The labs are designed for learners who have a basic understanding of programming
 
 
 #### **Lab 1: Build a Spark Application using Scala and SBT**
-https://github.com/osekoo/hands-on-spark-scala-2025/blob/develop/lab1-setup-build.md
+https://github.com/osekoo/hands-on-spark-scala-2025/blob/develop/lab1-setup-build.md  
 In this lab, you will learn to:
 - Set up a local development environment for Spark using Scala and SBT.
 - Build a simple word-count Spark application that processes data programmatically.
@@ -17,7 +17,7 @@ This lab focuses on introducing the fundamental building blocks of Spark applica
 
 
 #### **Lab 2: Run a Spark Application using Docker Containers**
-https://github.com/osekoo/hands-on-spark-scala-2025/blob/develop/lab2-run-spark-app.md
+https://github.com/osekoo/hands-on-spark-scala-2025/blob/develop/lab2-run-spark-app.md  
 In this lab, you will learn to:
 - Set up a Spark cluster using Docker and Docker Compose.
 - Execute a pre-built Spark application (from Lab 1) within the Dockerized Spark environment.
