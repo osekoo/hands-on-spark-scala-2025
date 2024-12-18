@@ -7,14 +7,18 @@ Before starting, ensure that:
 
 ### **1. Install Java 8**
 #### **Windows**
-1. Download the Java 8 JDK from the [Oracle website](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html).
-2. Run the installer and follow the installation instructions.
+1. Verify installation:
+   ```bash
+   java -version
+   ```
+2. If Java is not installed, download the Java 8 JDK from the [Oracle website](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html).
+3. Run the installer and follow the installation instructions.
 3. Set `JAVA_HOME`:
    - Right-click **This PC** > **Properties** > **Advanced system settings** > **Environment Variables**.
    - Add `JAVA_HOME` with the path to the JDK folder (e.g., `C:\Program Files\Java\jdk1.8.0_xx`).
    - Append `%JAVA_HOME%\bin` to the `Path` variable.
 
-4. Verify installation:
+5. Verify installation:
    ```bash
    java -version
    ```
@@ -102,7 +106,7 @@ Before starting, ensure that:
   - Install the **Metals** extension for Scala.
 
 #### **Edit `build.sbt`**
-Modify `build.sbt` to include Spark dependencies:
+- Modify `build.sbt` to include Spark dependencies:
 ```scala
 name := "wordcount"
 
@@ -111,37 +115,45 @@ version := "0.1"
 scalaVersion := "2.12.18"
 
 libraryDependencies ++= Seq(
-  "org.apache.spark" %% "spark-core" % "3.3.2",
-  "org.apache.spark" %% "spark-sql" % "3.3.2"
+  "org.apache.spark" %% "spark-core" % "3.5.2",
+  "org.apache.spark" %% "spark-sql" % "3.5.2"
 )
 ```
+- Sync Sbt dependencies.
 
 #### **Create `MainApp.scala`**
 1. Create a file named `MainApp.scala` in the `src/main/scala` directory.
 2. Implement the word count logic:
    ```scala
-   import org.apache.spark.sql.SparkSession
-
-   object MainApp {
-     def main(args: Array[String]): Unit = {
-       val spark = SparkSession.builder
-         .appName("Word Count")
-         .master("local[*]")
-         .getOrCreate()
-
-       val data = Seq("hello world", "hello spark", "hello scala", "word count example")
-       val rdd = spark.sparkContext.parallelize(data)
-
-       val wordCounts = rdd
-         .flatMap(line => line.split(" "))
-         .map(word => (word, 1))
-         .reduceByKey(_ + _)
-
-       wordCounts.collect().foreach(println)
-
-       spark.stop()
-     }
-   }
+         import org.apache.spark.sql.SparkSession
+         
+         object MainApp {
+           def main(args: Array[String]): Unit = {
+             val spark = SparkSession.builder
+               .appName("Word Count")
+               .master("local[*]")
+               .getOrCreate()  // create a Spark session
+         
+             val fruits = Seq("apple", "banana", "carrot", "orange", "kiwi", "melon", "pineapple")  // list of fruits
+             // pick between 5 and 15 fruits randomly as one item of a seq and repeat them 1000 times to create a dataset
+             val data = (1 to 1000).map(_ =>
+               scala.util.Random.shuffle(fruits)
+                 .take(5 + scala.util.Random.nextInt(11))
+                 .mkString(" "))
+         
+             // create an RDD from the dataset
+             val rdd = spark.sparkContext.parallelize(data)
+             val wordCounts = rdd
+               .flatMap(line => line.split(" "))  // split each line into words
+               .map(word => (word, 1))  // create a tuple of (word, 1)
+               .reduceByKey((a, b) => a + b)  // sum the counts
+               .sortBy(a => a._2, ascending = false)  // sort by count in descending order
+         
+             wordCounts.collect().foreach(println)  // print the result
+         
+             spark.stop()  // stop the Spark session
+           }
+         }
    ```
 
 
@@ -174,13 +186,13 @@ spark-submit --class MainApp target/scala-2.12/wordcount_2.12-0.1.jar
 ### **Expected Output**
 The console should display the word count results:
 ```
-(hello, 3)
-(world, 1)
-(spark, 1)
-(scala, 1)
-(word, 1)
-(count, 1)
-(example, 1)
+(pineapple,940)
+(melon,934)
+(orange,934)
+(banana,929)
+(kiwi,927)
+(apple,927)
+(carrot,919)
 ```
 
 
@@ -199,8 +211,6 @@ To assist you in setting up and familiarizing yourself with IntelliJ IDEA and Vi
 
 - **Official Getting Started Guide:** https://www.jetbrains.com/help/idea/getting-started.html JetBrains provides a comprehensive guide to help you get started with IntelliJ IDEA, covering installation, configuration, and basic features. 
 
-- **Creating Your First Java Application:** https://www.jetbrains.com/help/idea/creating-and-running-your-first-java-application.html This tutorial walks you through creating, running, and packaging a simple Java application, introducing you to IntelliJ IDEA's coding assistance and tools. 
-
 - **IntelliJ IDEA Tutorial for Beginners:** https://examples.javacodegeeks.com/java-development/desktop-java/ide/intellij-idea-tutorial-beginners/ An introductory tutorial that demonstrates how to create your first project using IntelliJ IDEA, suitable for those new to the IDE. 
 
 **Visual Studio Code:**
@@ -212,8 +222,5 @@ To assist you in setting up and familiarizing yourself with IntelliJ IDEA and Vi
 - **Getting Started with Visual Studio Code:** https://dev.to/umeshtharukaofficial/getting-started-with-vscode-a-beginners-guide-2mic A beginner's guide that covers installation, basic features, customization, and productivity tips for Visual Studio Code. 
 
 These resources should provide a solid foundation for you to begin working with IntelliJ IDEA and Visual Studio Code effectively.
-
-For a quick visual introduction to Visual Studio Code, you might find the following video helpful:
-
  
 
