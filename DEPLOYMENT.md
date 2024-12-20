@@ -1,4 +1,4 @@
-### **Lab 3: Deployment On Cluster**
+### **Deployment On Cluster**
 
 This lab focuses on deploying and executing a Spark application on the **LAMSADE Cluster**. You will learn how to transfer files, configure the remote environment, run Spark jobs, and monitor progress using the provided cluster resources. By completing this lab, you will gain practical experience in deploying and managing Spark applications on a distributed cluster environment.
 
