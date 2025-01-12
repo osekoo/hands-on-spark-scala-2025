@@ -11,7 +11,7 @@ The purpose of this lab is to create and build a Spark project using **Scala** a
      ```bash
      sbt new osekoo/spark-scala.g8
      ```
-   - Provide the required details, such as the project name (wordcount), Scala version, and Spark version.
+   - Provide the required details, such as the project name (wordcount), Scala version (2.12.18), and Spark version (3.5.2).
 
 2. **Open the Project in an IDE**:
    - Use your favorite IDE (e.g., **Visual Studio Code** or **IntelliJ IDEA**) to open the project as described in the tutorial. This will make editing and managing your code easier.
